@@ -1,7 +1,9 @@
 def encriptar(msg: str) -> str:
     """criptografa a mensagem usando a cifra de playfair"""
 
+    msg = _tratar_mensagem(msg)
     tabela = _criar_tabela()
+
 
     return msg
 
@@ -35,7 +37,7 @@ def _tratar_mensagem(msg) -> str:
 
         nova_msg.append(' ')
         x += 1
-    return ''.join(nova_msg)
+    return ''.join(nova_msg).strip()
  
 def decriptar():
     pass
@@ -44,4 +46,4 @@ if __name__ == '__main__':
     msg_test = 'agua mole em pedra dura tanto bate ate que fura'
 
     #print(encriptar(msg_test))
-    print(_tratar_mensagem('hello one and all'))
+    print(_tratar_mensagem('hello one and alla'), end='')
