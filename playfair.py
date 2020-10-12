@@ -49,30 +49,6 @@ def _tratar_mensagem(msg: str) -> str:
         x += 1
     return ''.join(nova_msg)
 
-# ===================== decriptar =====================
-
-def decriptar(msg: str) -> str:
-    msg = list(map(_tratar_mensagem_codificada, msg.split()))
-    tabela = _criar_tabela()
-    msg_decodificada = []
-    for x in msg:
-        msg_decodificada.append(''.join(map(_transformar_codificada, x.split())))
-    
-    return ' '.join(msg_decodificada).replace('x', '')
-
-def _tratar_mensagem_codificada(msg):
-    msg = list(msg)
-    
-    x = 0
-    nova_msg = []
-    while x < len(msg):
-        nova_msg.append(msg[x])
-        nova_msg.append(msg[x+1])
-        nova_msg.append(' ')
-        x += 2
-
-    return ''.join(nova_msg).strip()
-
 def _transformar_decodificada(pares: str) -> str:
     letra1, letra2 = list(pares)
     tabela = _criar_tabela()
@@ -103,6 +79,30 @@ def _transformar_decodificada(pares: str) -> str:
         letra2 = tabela[linha2][coluna1]
 
     return ''.join([letra1, letra2])
+
+# ===================== decriptar =====================
+
+def decriptar(msg: str) -> str:
+    msg = list(map(_tratar_mensagem_codificada, msg.split()))
+    tabela = _criar_tabela()
+    msg_decodificada = []
+    for x in msg:
+        msg_decodificada.append(''.join(map(_transformar_codificada, x.split())))
+    
+    return ' '.join(msg_decodificada).replace('x', '')
+
+def _tratar_mensagem_codificada(msg):
+    msg = list(msg)
+    
+    x = 0
+    nova_msg = []
+    while x < len(msg):
+        nova_msg.append(msg[x])
+        nova_msg.append(msg[x+1])
+        nova_msg.append(' ')
+        x += 2
+
+    return ''.join(nova_msg).strip()
 
 def _transformar_codificada(pares: str):
     letra1, letra2 = list(pares)
@@ -135,7 +135,6 @@ def _transformar_codificada(pares: str):
         letra2 = tabela[linha2][coluna1]
 
     return ''.join([letra1, letra2])    
-
 
 if __name__ == '__main__':
     msg_test = 'agua mole em pedra dura tanto bate ate que fura'
