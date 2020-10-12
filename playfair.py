@@ -1,3 +1,23 @@
+def _criar_tabela() -> list:
+    """retorna uma tabela 5x5 prenchida com o alfabeto, com excecao da letra j"""
+    return [
+        ['a', 'b', 'c', 'd', 'e'],
+        ['f', 'g', 'h', 'i', 'k'],
+        ['l', 'm', 'n', 'o', 'p'],
+        ['q', 'r', 's', 't', 'u'],
+        ['v', 'w', 'x', 'y', 'z'],
+    ]
+
+def _obter_linha_e_coluna(elemento: str, tabela: list):
+    """retorna o numero da linha e coluna de um elemento na tabela"""
+    for x in range(len(tabela)):
+        if elemento in tabela[x]:
+            break
+    coluna = tabela[x].index(elemento)
+    return x, coluna
+
+# ===================== encriptar =====================
+
 def encriptar(msg: str) -> str:
     """criptografa a mensagem usando a cifra de playfair"""
 
@@ -8,16 +28,6 @@ def encriptar(msg: str) -> str:
         msg_codificada.append(''.join(map(_transformar_decodificada, x.split())))
 
     return ' '.join(msg_codificada)
-
-def _criar_tabela() -> list:
-    """retorna uma tabela 5x5 prenchida com o alfabeto, com excecao da letra j"""
-    return [
-        ['a', 'b', 'c', 'd', 'e'],
-        ['f', 'g', 'h', 'i', 'k'],
-        ['l', 'm', 'n', 'o', 'p'],
-        ['q', 'r', 's', 't', 'u'],
-        ['v', 'w', 'x', 'y', 'z'],
-    ]
 
 def _tratar_mensagem(msg: str) -> str:
     x = 0
@@ -38,7 +48,18 @@ def _tratar_mensagem(msg: str) -> str:
         nova_msg.append(' ')
         x += 1
     return ''.join(nova_msg)
- 
+
+# ===================== decriptar =====================
+
+def decriptar(msg: str) -> str:
+    msg = list(map(_tratar_mensagem_codificada, msg.split()))
+    tabela = _criar_tabela()
+    msg_decodificada = []
+    for x in msg:
+        msg_decodificada.append(''.join(map(_transformar_codificada, x.split())))
+    
+    return ' '.join(msg_decodificada).replace('x', '')
+
 def _tratar_mensagem_codificada(msg):
     msg = list(msg)
     
@@ -115,24 +136,6 @@ def _transformar_codificada(pares: str):
 
     return ''.join([letra1, letra2])    
 
-
-def _obter_linha_e_coluna(elemento: str, tabela: list):
-    """retorna o numero da linha e coluna de um elemento na tabela"""
-    for x in range(len(tabela)):
-        if elemento in tabela[x]:
-            break
-    coluna = tabela[x].index(elemento)
-    return x, coluna
-
-
-def decriptar(msg: str) -> str:
-    msg = list(map(_tratar_mensagem_codificada, msg.split()))
-    tabela = _criar_tabela()
-    msg_decodificada = []
-    for x in msg:
-        msg_decodificada.append(''.join(map(_transformar_codificada, x.split())))
-    
-    return ' '.join(msg_decodificada).replace('x', '')
 
 if __name__ == '__main__':
     msg_test = 'agua mole em pedra dura tanto bate ate que fura'
