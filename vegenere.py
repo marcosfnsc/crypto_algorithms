@@ -35,6 +35,11 @@ def encriptar(mensagem:str, chave: str) -> str:
     chave = _tratar_chave(chave, mensagem).split()
     msg = mensagem.split()
 
+    msg_codificada = []
+    for x in range(len(msg)):
+        msg_codificada.append(_codificar(msg[x], chave[x]))
+
+    return ' '.join(msg_codificada)
 
 def _codificar(msg: str, chave: str) -> str:
     """mapea a linha referente a letra da chave e coluna referente a mensagem da chave"""
