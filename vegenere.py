@@ -31,6 +31,8 @@ def _tratar_chave(chave: str, msg: str) -> str:
 
     return ''.join(nova_chave)
 
+# ===================== encriptar =====================
+
 def encriptar(mensagem:str, chave: str) -> str:
     chave = _tratar_chave(chave, mensagem).split()
     msg = mensagem.split()
@@ -61,8 +63,38 @@ def _codificar(msg: str, chave: str) -> str:
 
     return ''.join(msg_codificada)
 
+# ===================== decriptar =====================
+
 def decriptar(mensagem:str, chave: str) -> str:
-    pass
+    chave = _tratar_chave(chave, mensagem).split()
+    msg = mensagem.split()
+
+    msg_decodificada = []
+    for x in range(len(msg)):
+        msg_decodificada.append(_decodificar(msg[x], chave[x]))
+
+    return ' '.join(msg_decodificada)
+
+def _decodificar(msg: str, chave: str) -> str:
+    tabela = _criar_tabela()
+    msg_decodificada = []
+
+    for letra in range(len(msg)):
+        x = 0
+        while True:
+            if chave[letra] == tabela[x][0]:
+                linha = x
+                coluna = tabela[x].index(msg[letra])
+
+                msg_decodificada.append(tabela[0][coluna])
+                break
+            else:
+                x += 1
+
+    return ''.join(msg_decodificada)
+    
 
 if __name__ == '__main__':
-    pass
+    
+    assert encriptar('todo mundo odeia o chris', chave='sucodefruta') == 'lifc pysui hdwcc c flwzm'
+    assert decriptar('lifc pysui hdwcc c flwzm', chave='sucodefruta') == 'todo mundo odeia o chris'
