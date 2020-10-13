@@ -1,3 +1,19 @@
+""" modulo playfair - contem a implementacao da cifra playfair
+
+funcoes publicas:
+ - encriptar
+ - decriptar
+
+ A implementacao da cifra é capaz de decriptar e resultar em 100$ da mensagem
+ original em alguns casos ideais, mensagens que só contem letras, sem acentos,
+ sem simbolos, sem digitos, e sem a letra 'x' pois essa letra é usada como flag
+ e ao decriptar será removida do resutlado da decifragem.
+
+O codigo fonte é divido em tres sessoes, a primeira contem funcoes usadas nos dois
+processos da cifra, a segunda sessão é contem funcoes usadas no processo de encriptacao,
+e a ultima sessão contem as funcoes usadas no processo de decriptacao
+"""
+
 def _criar_tabela() -> list:
     """retorna uma tabela 5x5 prenchida com o alfabeto, com excecao da letra j"""
     return [
@@ -147,4 +163,5 @@ def _decodificar(pares: str):
 if __name__ == '__main__':
 
     assert encriptar('hello one and all') == 'kcnvmp pocz clcy fqnv'
+    print(decriptar('kcnvmp pocz clcy fqnv'))
     
