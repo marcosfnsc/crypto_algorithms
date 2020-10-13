@@ -14,8 +14,6 @@ processos da cifra, a segunda sessão é contem funcoes usadas no processo de en
 e a ultima sessão contem as funcoes usadas no processo de decriptacao
 """
 
-import string
-
 def _criar_tabela(chave: str) -> list:
     """retorna uma tabela 5x5 prenchida com o alfabeto, com excecao da letra j"""
 
@@ -122,16 +120,24 @@ def _codificar(pares: str, tabela: list) -> str:
 
 # ===================== decriptar =====================
 
-def decriptar(msg: str) -> str:
+def decriptar(msg: str, chave: str) -> str:
+    """descriptografa uma mensagem codificada usando a cifra de playfair"""
+
     msg = list(map(_tratar_mensagem_codificada, msg.split()))
-    tabela = _criar_tabela()
+    tabela = _criar_tabela(chave)
     msg_decodificada = []
-    for x in msg:
-        msg_decodificada.append(''.join(map(_decodificar, x.split())))
     
-    return ' '.join(msg_decodificada).replace('x', '')
+    for sub_msg in msg:
+        sub_msg_original = []
+        for silabas in sub_msg.split():
+            sub_msg_original.append(_decodificar(silabas, tabela))
+
+        msg_decodificada.append(''.join(sub_msg_original))
+
+    return ' '.join(msg_decodificada).replace('x', '') # remover 'x' antes de retornar
 
 def _tratar_mensagem_codificada(msg):
+    """separa por pares de letras a mensagem codificada"""
     msg = list(msg)
     
     x = 0
@@ -144,9 +150,10 @@ def _tratar_mensagem_codificada(msg):
 
     return ''.join(nova_msg).strip()
 
-def _decodificar(pares: str):
+def _decodificar(pares: str, tabela):
+    """decodifica os pares de letras usando as regras de playfair"""
+    
     letra1, letra2 = list(pares)
-    tabela = _criar_tabela()
     linha1, coluna1 = _obter_linha_e_coluna(letra1, tabela)
     linha2, coluna2 = _obter_linha_e_coluna(letra2, tabela)
 
@@ -179,6 +186,6 @@ def _decodificar(pares: str):
 if __name__ == '__main__':
 
     # testes
-    assert encriptar('hello one and all', chave='pamdemia') == 'opsmnh homz dkmy mksm'
-    #assert decriptar('kcnvmp pocz clcy fqnv') == 'hello one and all'
+    assert encriptar('hello one and all',     chave='pamdemia') == 'opsmnh homz dkmy mksm'
+    assert decriptar('opsmnh homz dkmy mksm', chave='pamdemia') == 'hello one and all'
     
