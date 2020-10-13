@@ -14,15 +14,32 @@ processos da cifra, a segunda sessão é contem funcoes usadas no processo de en
 e a ultima sessão contem as funcoes usadas no processo de decriptacao
 """
 
-def _criar_tabela() -> list:
+import string
+
+def _criar_tabela(chave: str) -> list:
     """retorna uma tabela 5x5 prenchida com o alfabeto, com excecao da letra j"""
-    return [
-        ['a', 'b', 'c', 'd', 'e'],
-        ['f', 'g', 'h', 'i', 'k'],
-        ['l', 'm', 'n', 'o', 'p'],
-        ['q', 'r', 's', 't', 'u'],
-        ['v', 'w', 'x', 'y', 'z'],
-    ]
+
+    chave = _tratar_chave(chave)
+    tabela = []
+
+    while len(chave) >= 5:
+        tabela.append(chave[:5])
+        del(chave[:5])
+
+    return tabela
+
+def _tratar_chave(chave: str, alfabeto='abcdefghiklmnopqrstuvwxyz') -> list:
+    """remove letras repetidas da chave e retona uma lista contendo as letras"""
+    alfabeto_restante = list(alfabeto)
+    letras = []
+    for letra in chave:
+        if letra in letras:
+            continue
+        elif letra != 'j':
+            letras.append(letra)
+            del(alfabeto_restante[alfabeto_restante.index(letra)])
+
+    return letras + alfabeto_restante
 
 def _obter_linha_e_coluna(elemento: str, tabela: list):
     """retorna o numero da linha e coluna de um elemento na tabela"""
@@ -33,17 +50,17 @@ def _obter_linha_e_coluna(elemento: str, tabela: list):
 
 # ===================== encriptar =====================
 
-def encriptar(msg: str) -> str:
+def encriptar(msg: str, chave: str) -> str:
     """criptografa a mensagem usando a cifra de playfair"""
 
     msg = list(map(_tratar_mensagem, msg.split()))
-    tabela = _criar_tabela()
+    tabela = _criar_tabela(chave)
     msg_codificada = []
 
     for sub_msg in msg:
         sub_msg_code = []
-        for silaba in sub_msg.split():
-            sub_msg_code.append(_codificar(silaba))
+        for silabas in sub_msg.split():
+            sub_msg_code.append(_codificar(silabas, tabela))
 
         msg_codificada.append(''.join(sub_msg_code))
 
@@ -71,11 +88,10 @@ def _tratar_mensagem(msg: str) -> str:
         x += 1
     return ''.join(nova_msg)
 
-def _codificar(pares: str) -> str:
+def _codificar(pares: str, tabela: list) -> str:
     """transforma as silabas originais em silabas codificadas"""
 
     letra1, letra2 = list(pares)
-    tabela = _criar_tabela()
     linha1, coluna1 = _obter_linha_e_coluna(letra1, tabela)
     linha2, coluna2 = _obter_linha_e_coluna(letra2, tabela)
 
@@ -162,6 +178,7 @@ def _decodificar(pares: str):
 
 if __name__ == '__main__':
 
-    assert encriptar('hello one and all') == 'kcnvmp pocz clcy fqnv'
-    print(decriptar('kcnvmp pocz clcy fqnv'))
+    # testes
+    assert encriptar('hello one and all', chave='pamdemia') == 'opsmnh homz dkmy mksm'
+    #assert decriptar('kcnvmp pocz clcy fqnv') == 'hello one and all'
     
