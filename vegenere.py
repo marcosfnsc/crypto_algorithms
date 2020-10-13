@@ -1,3 +1,10 @@
+""" implementacao da cifra de vegenere
+
+funcoes publicas:
+ - encriptar
+ - decriptar
+"""
+
 import string
 
 def _criar_tabela():
@@ -34,6 +41,8 @@ def _tratar_chave(chave: str, msg: str) -> str:
 # ===================== encriptar =====================
 
 def encriptar(mensagem:str, chave: str) -> str:
+    """codifica a mensagem a partir de uma chave usando a cifra de vegenere"""
+
     chave = _tratar_chave(chave, mensagem).split()
     msg = mensagem.split()
 
@@ -66,6 +75,8 @@ def _codificar(msg: str, chave: str) -> str:
 # ===================== decriptar =====================
 
 def decriptar(mensagem:str, chave: str) -> str:
+    """decodifica a mensagem a partir de uma chave usando a cifra de vegenere"""
+
     chave = _tratar_chave(chave, mensagem).split()
     msg = mensagem.split()
 
@@ -76,6 +87,8 @@ def decriptar(mensagem:str, chave: str) -> str:
     return ' '.join(msg_decodificada)
 
 def _decodificar(msg: str, chave: str) -> str:
+    """mapea a linha referente a letra da chave e coluna referente a mensagem da chave"""
+
     tabela = _criar_tabela()
     msg_decodificada = []
 
@@ -93,8 +106,7 @@ def _decodificar(msg: str, chave: str) -> str:
 
     return ''.join(msg_decodificada)
     
-
 if __name__ == '__main__':
-    
+    # testes
     assert encriptar('todo mundo odeia o chris', chave='sucodefruta') == 'lifc pysui hdwcc c flwzm'
     assert decriptar('lifc pysui hdwcc c flwzm', chave='sucodefruta') == 'todo mundo odeia o chris'
