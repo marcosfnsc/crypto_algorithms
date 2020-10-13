@@ -1,11 +1,13 @@
 import string
 
 def _criar_tabela():
+    """retona uma tabela 26x26 contendo um alfabeto de ordem alternada em cada linha"""
+
     alfabeto = list(string.ascii_lowercase)
     tabela = []
 
     for x in range(len(string.ascii_lowercase)):
-        linha = alfabeto[:]
+        linha = alfabeto[:] # [:] slice, faz com que a passagem do objeto seja por copia
         tabela.append(linha)
 
         alfabeto.append(alfabeto[0])
