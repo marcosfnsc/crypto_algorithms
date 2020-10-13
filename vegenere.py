@@ -15,7 +15,26 @@ def _criar_tabela():
 
     return tabela
 
+def _tratar_chave(chave: str, msg: str) -> str:
+    """Aumenta o tamanho da chave pra que tenha o mesmo tamanho da mensagem"""
+
+    chave = list(chave)
+    nova_chave = []
+    
+    for caractere in msg:
+        if caractere != ' ':
+            nova_chave.append(chave[0])
+            chave.append(chave[0])
+            del(chave[0])
+        else:
+            nova_chave.append(' ')
+
+    return ''.join(nova_chave)
+
 def encriptar(mensagem:str, chave: str) -> str:
+    msg = mensagem.split()
+
+def _codificar(msg: str, tabela: list) -> str:
     pass
 
 def decriptar(mensagem:str, chave: str) -> str:
