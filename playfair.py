@@ -10,11 +10,10 @@ def _criar_tabela() -> list:
 
 def _obter_linha_e_coluna(elemento: str, tabela: list):
     """retorna o numero da linha e coluna de um elemento na tabela"""
+    
     for x in range(len(tabela)):
         if elemento in tabela[x]:
-            break
-    coluna = tabela[x].index(elemento)
-    return x, coluna
+            return x, tabela[x].index(elemento)
 
 # ===================== encriptar =====================
 
@@ -24,12 +23,19 @@ def encriptar(msg: str) -> str:
     msg = list(map(_tratar_mensagem, msg.split()))
     tabela = _criar_tabela()
     msg_codificada = []
-    for x in msg:
-        msg_codificada.append(''.join(map(_transformar_decodificada, x.split())))
+
+    for sub_msg in msg:
+        sub_msg_code = []
+        for silaba in sub_msg.split():
+            sub_msg_code.append(_codificar(silaba))
+
+        msg_codificada.append(''.join(sub_msg_code))
 
     return ' '.join(msg_codificada)
 
 def _tratar_mensagem(msg: str) -> str:
+    """recebe a mensagem original e separa por silabas seguindo as regras de playfair"""
+
     x = 0
     nova_msg = []
     while x < len(msg):
@@ -49,7 +55,9 @@ def _tratar_mensagem(msg: str) -> str:
         x += 1
     return ''.join(nova_msg)
 
-def _transformar_decodificada(pares: str) -> str:
+def _codificar(pares: str) -> str:
+    """transforma as silabas originais em silabas codificadas"""
+
     letra1, letra2 = list(pares)
     tabela = _criar_tabela()
     linha1, coluna1 = _obter_linha_e_coluna(letra1, tabela)
@@ -87,7 +95,7 @@ def decriptar(msg: str) -> str:
     tabela = _criar_tabela()
     msg_decodificada = []
     for x in msg:
-        msg_decodificada.append(''.join(map(_transformar_codificada, x.split())))
+        msg_decodificada.append(''.join(map(_decodificar, x.split())))
     
     return ' '.join(msg_decodificada).replace('x', '')
 
@@ -104,7 +112,7 @@ def _tratar_mensagem_codificada(msg):
 
     return ''.join(nova_msg).strip()
 
-def _transformar_codificada(pares: str):
+def _decodificar(pares: str):
     letra1, letra2 = list(pares)
     tabela = _criar_tabela()
     linha1, coluna1 = _obter_linha_e_coluna(letra1, tabela)
@@ -137,10 +145,6 @@ def _transformar_codificada(pares: str):
     return ''.join([letra1, letra2])    
 
 if __name__ == '__main__':
-    msg_test = 'agua mole em pedra dura tanto bate ate que fura'
 
-    #print(encriptar(msg_test))
-    #print(_tratar_mensagem('hello one and alla'), end='')
-    cifra = encriptar('hello one and all')
-    print(cifra)
-    print(decriptar(cifra))
+    assert encriptar('hello one and all') == 'kcnvmp pocz clcy fqnv'
+    
