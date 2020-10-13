@@ -32,10 +32,29 @@ def _tratar_chave(chave: str, msg: str) -> str:
     return ''.join(nova_chave)
 
 def encriptar(mensagem:str, chave: str) -> str:
+    chave = _tratar_chave(chave, mensagem).split()
     msg = mensagem.split()
 
-def _codificar(msg: str, tabela: list) -> str:
-    pass
+
+def _codificar(msg: str, chave: str) -> str:
+    """mapea a linha referente a letra da chave e coluna referente a mensagem da chave"""
+
+    tabela = _criar_tabela()
+    msg_codificada = []
+
+    for letra in range(len(msg)):
+        x = 0
+        while True:
+            if chave[letra] == tabela[x][0]:
+                linha = x
+                coluna = tabela[0].index(msg[letra])
+
+                msg_codificada.append(tabela[linha][coluna])
+                break
+            else:
+                x += 1
+
+    return ''.join(msg_codificada)
 
 def decriptar(mensagem:str, chave: str) -> str:
     pass
