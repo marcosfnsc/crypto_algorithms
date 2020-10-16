@@ -1,3 +1,7 @@
+# Universidade Estadual do Rio Grande do Norte - Curso de Ciências da Computação
+# Disciplina: Segurança em Redes de Computadores
+# Alunos: Jefferson Ximenes, Marcos Fonseca
+
 """ modulo playfair - contem a implementacao da cifra playfair
 
 funcoes publicas:

@@ -1,3 +1,7 @@
+# Universidade Estadual do Rio Grande do Norte - Curso de Ciências da Computação
+# Disciplina: Segurança em Redes de Computadores
+# Alunos: Jefferson Ximenes, Marcos Fonseca
+
 """ implementacao da cifra de vegenere
 
 funcoes publicas:
