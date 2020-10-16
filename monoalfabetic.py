@@ -55,5 +55,5 @@ class MonoAlfabetic:
 
 crypto = MonoAlfabetic()
 encrip = crypto.encrypt("if we wish to replace letters", "DKVQFIBJWPESCXHTMYAUOLRGZN")
-print(encrip)
-print(crypto.decrypt(encrip, "DKVQFIBJWPESCXHTMYAUOLRGZN"))
+print("Palavra encriptada: {}".format(encrip))
+print("Palavra decriptada: {}".format(crypto.decrypt(encrip, "DKVQFIBJWPESCXHTMYAUOLRGZN")))
