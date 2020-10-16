@@ -2,7 +2,7 @@
 # Disciplina: Segurança em Redes de Computadores
 # Alunos: Jefferson Ximenes, Marcos Fonseca
 
-"""Implementacao da cifra de transposicao
+"""Implementacao da cifra de transposicao (linhas)
 
 funcoes publicas:
  - encriptar
