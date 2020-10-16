@@ -1,8 +1,8 @@
-import caesar_cipher as cesar
-from monoalfabetic import MonoAlfabetic as Monoalfabetica
-import playfair
-import vegenere
-import transposicao
+import cifras.caesar_cipher as cesar
+from cifras.monoalfabetic import MonoAlfabetic as Monoalfabetica
+import cifras.playfair
+import cifras.vegenere
+import cifras.transposicao
 
 def obter_msg_key():
     mensagem = input('Qual a mensagem?: ').strip()
