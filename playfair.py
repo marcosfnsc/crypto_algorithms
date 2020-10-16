@@ -107,11 +107,11 @@ def _codificar(pares: str, tabela: list) -> str:
         else:
             letra2 = tabela[linha2][coluna2+1]
     elif coluna1 == coluna2: # quando estão na mesma coluna
-        if linha1 == 4:
+        if linha1 == len(tabela)-1:
             letra1 = tabela[0][coluna1]
         else:
             letra1 = tabela[linha1+1][coluna1]
-        if linha2 == 4:
+        if linha2 == len(tabela)-1:
             letra2 = tabela[0][coluna2]
         else:
             letra2 = tabela[linha2+1][coluna2]
