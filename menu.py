@@ -1,3 +1,9 @@
+#import caesar_cipher as cesar
+#from monoalfabetic import SimpleSubstitution as Monoalfabetica
+import playfair
+import vegenere
+import transposicao
+
 def obter_msg_key():
     mensagem = input('Qual a mensagem?: ').strip()
     chave    = input('Qual a chave para a codificação?: ').strip()
@@ -28,18 +34,73 @@ if __name__ == "__main__":
         if op == '1':
             msg, chave = obter_msg_key()
             sub_op = procedimento()
+
+            """
+            cesarCifher = CaesarCipher()
+            if sub_op == '1':
+                resultado = cesarCifher.encrypt(msg, chave)
+                print(f'mensagem codificada => {resultado}')
+            elif sub_op == '2':
+                resultado = cesarCifher.decrypt(msg, chave)
+                print(f'mensagem decodificada => {resultado}')
+            """
+
+            print(20*'-=')
+
         elif op == '2':
             msg, chave = obter_msg_key()
             sub_op = procedimento()
+
+            """
+            monoalfabetic = Monoalfabetica()
+            if sub_op == '1':
+                resultado = monoalfabetic.encriptar(msg, chave)
+                print(f'mensagem codificada => {resultado}')
+            elif sub_op == '2':
+                resultado = monoalfabetic.decriptar(msg, chave)
+                print(f'mensagem decodificada' => {resultado})
+            """
+
+            print(20*'-=')
+
         elif op == '3':
             msg, chave = obter_msg_key()
             sub_op = procedimento()
+
+            if sub_op == '1':
+                resultado = playfair.encriptar(msg, chave)
+                print(f'mensagem codificada => {resultado}')
+            elif sub_op == '2':
+                resultado = playfair.decriptar(msg, chave)
+                print(f'mensagem decodificada => {resultado}')
+
+            print(20*'-=')
+
         elif op == '4':
             msg, chave = obter_msg_key()
             sub_op = procedimento()
+
+            if sub_op == '1':
+                resultado = vegenere.encriptar(msg, chave)
+                print(f'mensagem codificada => {resultado}')
+            elif sub_op == '2':
+                resultado = vegenere.decriptar(msg, chave)
+                print(f'mensagem decodificada => {resultado}')
+
+            print(20*'-=')
+
         elif op == '5':
             msg = input('Qual a mensagem a ser codificada?: ').strip()
             sub_op = procedimento()
+
+            if sub_op == '1':
+                resultado = transposicao.encriptar(msg)
+                print(f'mensagem codificada => {resultado}')
+            elif sub_op == '2':
+                resultado = transposicao.decriptar(msg)
+                print(f'mensagem decodificada => {resultado}')
+
+            print(20*'-=')
         else:
             print('Opcao invalida!')
             continue
