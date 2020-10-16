@@ -1,4 +1,4 @@
-class SimpleSubstitution:
+class MonoAlfabetic:
     def __init__(self):
         self.plain_alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         self.decrypting = False
@@ -53,7 +53,7 @@ class SimpleSubstitution:
         self.decrypting = True
         return self.encrypt(ciphertext, password)
 
-crypto = SimpleSubstitution()
+crypto = MonoAlfabetic()
 encrip = crypto.encrypt("if we wish to replace letters", "DKVQFIBJWPESCXHTMYAUOLRGZN")
 print(encrip)
 print(crypto.decrypt(encrip, "DKVQFIBJWPESCXHTMYAUOLRGZN"))
