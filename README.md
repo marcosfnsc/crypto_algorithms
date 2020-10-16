@@ -17,3 +17,6 @@ $ python menu.py
 * a cifra de cesar aceita uma chave do tipo inteiro
 * a cifra de transposição não requer chave
 * as outras cifras usam uma chave do tipo string
+
+o codigo da implementação de cada cifra está no diretorio __cifras__, cada cifra está um um arquivo
+com o mesmo nome
