@@ -1,5 +1,5 @@
-#import caesar_cipher as cesar
-#from monoalfabetic import SimpleSubstitution as Monoalfabetica
+import caesar_cipher as cesar
+from monoalfabetic import SimpleSubstitution as Monoalfabetica
 import playfair
 import vegenere
 import transposicao
@@ -26,24 +26,26 @@ if __name__ == "__main__":
         print('3 - cifra de playfair')
         print('4 - cifra de vegenere')
         print('5 - cifra de transposicao (linhas)')
+        print('0 - sair do programa')
 
         print(40*'=')
         print('Qual cifra deseja usar?:')
         op = input('> ').strip()
 
-        if op == '1':
+        if op == '0':
+            print('encerrando o programa...')
+            break
+        elif op == '1':
             msg, chave = obter_msg_key()
             sub_op = procedimento()
 
-            """
-            cesarCifher = CaesarCipher()
+            cesarCifher = cesar.CaesarCipher()
             if sub_op == '1':
-                resultado = cesarCifher.encrypt(msg, chave)
+                resultado = cesarCifher.encrypt(msg, int(chave))
                 print(f'mensagem codificada => {resultado}')
             elif sub_op == '2':
-                resultado = cesarCifher.decrypt(msg, chave)
+                resultado = cesarCifher.decrypt(msg, int(chave))
                 print(f'mensagem decodificada => {resultado}')
-            """
 
             print(20*'-=')
 
@@ -51,15 +53,13 @@ if __name__ == "__main__":
             msg, chave = obter_msg_key()
             sub_op = procedimento()
 
-            """
             monoalfabetic = Monoalfabetica()
             if sub_op == '1':
                 resultado = monoalfabetic.encriptar(msg, chave)
                 print(f'mensagem codificada => {resultado}')
             elif sub_op == '2':
                 resultado = monoalfabetic.decriptar(msg, chave)
-                print(f'mensagem decodificada' => {resultado})
-            """
+                print(f'mensagem decodificada => {resultado}')
 
             print(20*'-=')
 
