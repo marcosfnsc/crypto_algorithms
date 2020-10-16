@@ -1,5 +1,5 @@
 import caesar_cipher as cesar
-from monoalfabetic import SimpleSubstitution as Monoalfabetica
+from monoalfabetic import MonoAlfabetic as Monoalfabetica
 import playfair
 import vegenere
 import transposicao
