@@ -4,10 +4,10 @@ funcoes publicas:
  - encriptar
  - decriptar
 
- A implementacao da cifra é capaz de decriptar e resultar em 100$ da mensagem
+ Essa implementacao da cifra é capaz de decriptar e resultar em 100% da mensagem
  original em alguns casos ideais, mensagens que só contem letras, sem acentos,
- sem simbolos, sem digitos, e sem a letra 'x' pois essa letra é usada como flag
- e ao decriptar será removida do resutlado da decifragem.
+ sem simbolos, sem digitos, e sem o simbolo '@' pois esse simbolo é usado como flag
+ e ao decriptar será removido do resutlado da decifragem.
 
 O codigo fonte é divido em tres sessoes, a primeira contem funcoes usadas nos dois
 processos da cifra, a segunda sessão é contem funcoes usadas no processo de encriptacao,
@@ -15,7 +15,7 @@ e a ultima sessão contem as funcoes usadas no processo de decriptacao
 """
 
 def _criar_tabela(chave: str) -> list:
-    """retorna uma tabela 5x5 prenchida com o alfabeto, com excecao da letra j"""
+    """retorna uma tabela 6x5 prenchida com o alfabeto e alguns caracteres especiais"""
 
     chave = _tratar_chave(chave)
     tabela = []
@@ -26,14 +26,14 @@ def _criar_tabela(chave: str) -> list:
 
     return tabela
 
-def _tratar_chave(chave: str, alfabeto='abcdefghiklmnopqrstuvwxyz') -> list:
+def _tratar_chave(chave: str, alfabeto='abcdefghijklmnopqrstuvwxyz@123') -> list:
     """remove letras repetidas da chave e retona uma lista contendo as letras"""
     alfabeto_restante = list(alfabeto)
     letras = []
     for letra in chave:
         if letra in letras:
             continue
-        elif letra != 'j':
+        else:
             letras.append(letra)
             del(alfabeto_restante[alfabeto_restante.index(letra)])
 
@@ -73,11 +73,11 @@ def _tratar_mensagem(msg: str) -> str:
         nova_msg.append(msg[x])
 
         if x+1 >= len(msg):
-            nova_msg.append('x')
+            nova_msg.append('@')
             break
 
         if msg[x] == msg[x+1]:
-            nova_msg.append('x')
+            nova_msg.append('@')
         else:
             nova_msg.append(msg[x+1])
             x += 1
@@ -134,7 +134,7 @@ def decriptar(msg: str, chave: str) -> str:
 
         msg_decodificada.append(''.join(sub_msg_original))
 
-    return ' '.join(msg_decodificada).replace('x', '') # remover 'x' antes de retornar
+    return ' '.join(msg_decodificada).replace('@', '') # remover '@' antes de retornar
 
 def _tratar_mensagem_codificada(msg):
     """separa por pares de letras a mensagem codificada"""
@@ -186,6 +186,6 @@ def _decodificar(pares: str, tabela):
 if __name__ == '__main__':
 
     # testes
-    assert encriptar('hello one and all',     chave='pamdemia') == 'opsmnh homz dkmy mksm'
-    assert decriptar('opsmnh homz dkmy mksm', chave='pamdemia') == 'hello one and all'
+    assert encriptar('hello one and all',     chave='pamdemia') == 'npj2hs tha3 eja2 djj2'
+    assert decriptar('npj2hs tha3 eja2 djj2', chave='pamdemia') == 'hello one and all'
     
