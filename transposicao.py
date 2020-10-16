@@ -1,3 +1,10 @@
+"""Implementacao da cifra de transposicao
+
+funcoes publicas:
+ - encriptar
+ - decriptar
+"""
+
 # ===================== encriptar =====================
 
 def encriptar(mensagem: str) -> str:
