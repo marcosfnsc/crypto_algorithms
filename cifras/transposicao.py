@@ -49,6 +49,9 @@ def decriptar(mensagem: str) -> str:
 def _decodificar(msg: list) -> list:
     tabela = []
 
+    if len(msg) % 2 != 0:
+        msg.append(' ')
+
     metade = len(msg) // 2
     tabela.append(msg[:metade])
     tabela.append(msg[metade:])
