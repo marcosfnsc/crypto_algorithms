@@ -25,7 +25,7 @@ class CaesarCipher:
         command = int(input())
 
         print("Digite a mensagem: ")
-        message = str(input())
+        message = input()
         
         print("Quantas rotações ?")
         rot = int(input())
